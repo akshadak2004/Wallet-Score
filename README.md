@@ -40,5 +40,6 @@ Two main categories were analyzed:
 
 ## How to Run
 1. Add your wallet list to `Wallet_id.csv`:
-2. wallet_scores.csv – Final scores and cluster assignments for each wallet.
-3. all_wallet_transactions.json – Full transaction history.
+2. run wallet.py
+3. wallet_scores.csv – Final scores and cluster assignments for each wallet.
+4. all_wallet_transactions.json – Full transaction history.
