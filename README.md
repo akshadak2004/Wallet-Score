@@ -1,39 +1,37 @@
-Wallet Score Project
-Overview
-This project analyzes 103 wallet addresses and assigns each a credit score (0–1000) based on their Ethereum mainnet activity.
-The scoring is based on their transaction volume, activity frequency, and contract interactions.
+# Wallet-Score
 
-What This Project Does
-Reads a list of 103 wallet addresses from Wallet_id.csv.
+## Overview
+This project checks 103 wallet addresses for activity on **Polygon** and **Ethereum** networks, fetches their transactions, and assigns a **credit score (0–1000)** based on behavior.
 
-Checks if these wallets have any activity:
+If no activity is found on Polygon, it falls back to Ethereum (where transactions exist).
 
-First, it checks Polygon network (via free APIs) → No transactions found.
+## What It Does
+- Fetches **ETH/token transfers** and **smart contract interactions**.
+- Calculates:
+  - Transfers count (`num_transfers`)
+  - Contract call count (`num_contract_calls`)
+  - Total ETH volume
+  - Transaction count
+  - Active days
+- Groups wallets into **4 clusters** using K-Means.
+- Assigns a **credit score** based on activity.
 
-Then, it checks Ethereum mainnet, where activity is found.
+## Why Ethereum?
+Polygon was checked first (no transactions found).  
+All scores are based on **Ethereum mainnet transactions**, where wallets are active.
 
-Fetches all transactions for each wallet using the Etherscan API:
+## How Scores Are Assigned
+Wallets are clustered by behavior:
+- **Cluster 1 → 1000 (Most Active)**  
+- **Cluster 2 → 800 (Active, High Volume)**  
+- **Cluster 0 → 650 (Low/Casual)**  
+- **Cluster 3 → 400 (Risky or Irregular)**  
 
-ETH or token transfers.
+Scores are stored in `wallet_scores.csv`.
 
-Contract calls (DeFi or smart contract interactions).
+## Files Produced
+- `all_wallet_transactions.json` → Raw transaction data.  
+- `wallet_scores.csv` → Final wallet scores and clusters.
 
-Processes and cleans the data:
-
-Counts the number of transfers.
-
-Counts the number of contract calls.
-
-Calculates total transaction volume (ETH).
-
-Computes transaction count and active days (days the wallet was used).
-
-Groups wallets into 4 clusters using K-Means clustering.
-
-Assigns each wallet a credit score (0–1000) based on cluster behavior.
-
-Why Ethereum Network?
-The wallets were first checked on Polygon network.
-
-Since no activity was detected, the analysis was done on the Ethereum mainnet, where these wallets had actual transactions.
-
+## How to Run
+1. Add your wallet list to `Wallet_id.csv`:
