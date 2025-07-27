@@ -1,9 +1,7 @@
 # Wallet-Score
 
 ## Overview
-This project checks 103 wallet addresses for activity on **Polygon** and **Ethereum** networks, fetches their transactions, and assigns a **credit score (0–1000)** based on behavior.
-
-If no activity is found on Polygon, it falls back to Ethereum (where transactions exist).
+This project checks 103 wallet addresses for activity on **Ethereum** networks, fetches their transactions, and assigns a **credit score (0–1000)** based on behavior.
 
 ## What It Does
 - Fetches **ETH/token transfers** and **smart contract interactions**.
@@ -29,9 +27,18 @@ Wallets are clustered by behavior:
 
 Scores are stored in `wallet_scores.csv`.
 
+## Types of Transactions Considered
+
+Two main categories were analyzed:
+
+- **Transfers** – Standard ETH/token transfers.
+- **Contract Calls** – Smart contract interactions (e.g., DeFi lending/borrowing, swaps).
+
 ## Files Produced
 - `all_wallet_transactions.json` → Raw transaction data.  
 - `wallet_scores.csv` → Final wallet scores and clusters.
 
 ## How to Run
 1. Add your wallet list to `Wallet_id.csv`:
+2. wallet_scores.csv – Final scores and cluster assignments for each wallet.
+3. all_wallet_transactions.json – Full transaction history.
